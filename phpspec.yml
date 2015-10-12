@@ -1,0 +1,4 @@
+suites:
+  default:
+    namespace: MattCannon\EstateAgents
+    psr4_prefix: MattCannon\EstateAgents

@@ -1,0 +1,10 @@
+default:
+  suites:
+    domain: 
+      contexts: 
+       - PropertiesContext
+       - PropertyDetailsContext
+       - PropertyEpcsContext
+       - PropertyPricesContext
+       - PropertyImagesContext
+       - PropertyFloorplansContext

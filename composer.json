@@ -1,0 +1,30 @@
+{
+    "name": "matt-cannon/estate-agents",
+    "description": "Base package for accessing estate agent properties as objects.",
+    "authors": [{
+        "name": "Matt Cannon",
+        "email": "matt@mattcannon.uk"
+    }],
+    "license": "MIT",
+    "require": {},
+    "require-dev": {
+        "behat/behat": "~3.0.15",
+        "phpspec/phpspec": "~2.2.0",
+        "phpunit/phpunit": "~4.8.5",
+        "behat/mink": "~1.6.1",
+        "behat/mink-extension": "~2.0.1",
+        "behat/mink-goutte-driver": "~1.1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "MattCannon\\EstateAgents\\": "src/"
+        }
+    },
+    "scripts": {
+        "test": [
+            "clear",
+            "phpspec run",
+            "behat  features/property-details.feature --colors"
+        ]
+    }
+}
