@@ -57,4 +57,8 @@ class Price
     {
         return number_format($this->amount,0);
     }
+    public function intValue()
+    {
+        return intval($this->amount);
+    }
 }

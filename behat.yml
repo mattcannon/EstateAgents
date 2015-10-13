@@ -4,6 +4,7 @@ default:
       contexts: 
        - PropertiesContext
        - PropertyDetailsContext
+       - PropertyRoomsContext
        - PropertyEpcsContext
        - PropertyPricesContext
        - PropertyImagesContext

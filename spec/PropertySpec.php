@@ -75,4 +75,8 @@ class PropertySpec extends ObjectBehavior
     {
         $this->propertyType()->shouldBeString();
     }
+    function it_should_return_an_array_of_rooms()
+    {
+        $this->rooms()->shouldBeArray();
+    }
 }

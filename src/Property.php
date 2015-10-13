@@ -174,6 +174,10 @@ class Property
             'propertyType'=>[
                 'value'=>'',
                 'type'=>'string'
+            ],
+            'rooms'=>[
+                'value'=>[],
+                'type'=>Room::class
             ]
         ];
     }
@@ -248,8 +252,6 @@ class Property
         return $this->displayAddress;
     }
 
-        
-
     public function features()
     {
         return $this->features;
@@ -268,5 +270,10 @@ class Property
     public function numberOfBedrooms()
     {
         return $this->bedrooms;
+    }
+
+    public function rooms()
+    {
+        return $this->rooms;
     }
 }

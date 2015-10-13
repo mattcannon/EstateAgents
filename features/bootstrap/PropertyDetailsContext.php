@@ -51,7 +51,7 @@ class PropertyDetailsContext implements Context, SnippetAcceptingContext {
      */
     public function itShouldHaveAnArrayOfFeatures()
     {
-        PHPUnit_Framework_Assert::assertTrue(is_string($this->property->features()));
+        PHPUnit_Framework_Assert::assertTrue(is_array($this->property->features()));
     }
 
     /**
