@@ -46,4 +46,20 @@ interface PropertiesRepository
      * @return Property | null
      */
     public function find($agentRef);
+
+    /**
+     * @param $location
+     * @param $lowPrice
+     * @param $highPrice
+     * @return array
+     */
+    public function listSalesPropertiesForLocationPricedBetween($location, Price $lowPrice, Price $highPrice);
+
+    /**
+     * @param $location
+     * @param $lowPrice
+     * @param $highPrice
+     * @return array
+     */
+    public function listRentalPropertiesForLocationPricedBetween($location, Price $lowPrice, Price $highPrice);
 }

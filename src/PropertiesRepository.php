@@ -81,4 +81,30 @@ class PropertiesRepository implements PropertiesRepositoryInterface, PropertyCre
         
         return isset($properties[0]) ? $properties[0] : null; 
     }
+
+    /**
+     * @param $location
+     * @param $lowPrice
+     * @param $highPrice
+     * @return array
+     */
+    public function listSalesPropertiesForLocationPricedBetween($location, Price $lowPrice, Price $highPrice) 
+    {
+        return array_filter($this->listSalesProperties(), function (&$element) use ($lowPrice, $highPrice, $location) {
+            return $element->price()->isNotLessThan($lowPrice) && $element->price()->isNotGreaterThan($highPrice) && $element->town() == $location;
+        });
+    }
+
+    /**
+     * @param $location
+     * @param $lowPrice
+     * @param $highPrice
+     * @return array
+     */
+    public function listRentalPropertiesForLocationPricedBetween($location,Price  $lowPrice,Price  $highPrice) 
+    {
+        return array_filter($this->listRentalProperties(), function (&$element) use ($lowPrice, $highPrice, $location) {
+            return $element->price()->isNotLessThan($lowPrice) && $element->price()->isNotGreaterThan($highPrice) && $element->town() == $location;
+        });
+    }
 }

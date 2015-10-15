@@ -206,7 +206,75 @@ class PropertiesContext implements Context, SnippetAcceptingContext
         PHPUnit_Framework_Assert::assertEquals($agentRef,$this->property->agentRef());
     }
 
-  
+    /**
+     * @Given there are :total sale properties with :count priced under £:price located in :location
+     */
+    public function thereAreSalePropertiesWithPricedUnderPsLocatedIn($total, $count, $price, $location)
+    {
+        $properties = [];
+        for ($i = 0; $i < $count; $i++) {
+            $properties[] = Property::withDetails([
+                'type' => Property::sales,
+                'price' => $price->subtract(Price::fromString(10)),
+                'town'  => $location
+            ]);
+        }
+        for ($i = 0; $i < ($total - $count); $i++) {
+            $properties[] = Property::withDetails([
+                'type' => Property::sales,
+                'price' => $price->add(Price::fromString(10)),
+                'town'  => $location
+            ]);
+        }
+        $this->propertiesRepository->addProperties($properties);
+        
+    }
+    /**
+     * @Given there are :total rental properties with :count priced under £:price located in :location
+     */
+    public function thereAreRentalPropertiesWithPricedUnderPsLocatedIn($total, $count, $price, $location)
+    {
+        $properties = [];
+        for ($i = 0; $i < $count; $i++) {
+            $properties[] = Property::withDetails([
+                'type' => Property::rental,
+                'price' => $price->subtract(Price::fromString(10)),
+                'town'  => $location
+            ]);
+        }
+        for ($i = 0; $i < ($total - $count); $i++) {
+            $properties[] = Property::withDetails([
+                'type' => Property::rental,
+                'price' => $price->add(Price::fromString(10)),
+                'town'  => $location
+            ]);
+        }
+        $this->propertiesRepository->addProperties($properties);
+    }
 
+    /**
+     * @When I list rental properties between £:lowPrice and £:highPrice located in :location
+     */
+    public function iListRentalPropertiesBetweenPsAndPsLocatedIn($lowPrice, $highPrice, $location)
+    {
+        $this->properties = $this->propertiesRepository->listRentalPropertiesForLocationPricedBetween($location, $lowPrice, $highPrice);
+    }
 
+    /**
+     * @When I list sale properties between £:lowPrice and £:highPrice located in :location
+     */
+    public function iListSalePropertiesBetweenPsAndPsLocatedIn($lowPrice, $highPrice, $location)
+    {
+        $this->properties = $this->propertiesRepository->listSalesPropertiesForLocationPricedBetween($location, $lowPrice, $highPrice);
+    }
+
+    /**
+     * @Then it should be located in :location
+     */
+    public function itShouldBeLocatedIn($location)
+    {
+        foreach($this->properties as $property){
+            PHPUnit_Framework_Assert::assertEquals($location,$property->town);   
+        }
+    }
 }

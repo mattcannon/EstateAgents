@@ -36,6 +36,7 @@ class Property
      * @var array
      */
     public $attributes = [];
+    public $original;
     /**
      * @var array
      */
@@ -64,9 +65,10 @@ class Property
      */
     public static function withDetails(array $details)
     {
-        $property = new Self();
+        $property = new Static();
         $property->attributes = $details;
         $property->mergeWithInitialValues($details);
+        $property->original = isset($details['original']) ? $details['original'] : [];
         return $property;
     }
 
@@ -155,29 +157,41 @@ class Property
                 'value' => Property::singlePurchase,
                 'type' => 'string'
             ],
-            'displayAddress' =>[
+            'displayAddress' => [
                 'value' => '',
                 'type' => 'string'
             ],
             'bedrooms' => [
-                'value'=>'',
-                'type'=>'string'
+                'value' => '',
+                'type' => 'string'
             ],
-            'features'=>[
-                'value'=>[],
-                'type'=>'string'
+            'features' => [
+                'value' => [],
+                'type' => 'string'
             ],
-            'description'=>[
-                'value'=>'',
-                'type'=>'string'
+            'description' => [
+                'value' => '',
+                'type' => 'string'
             ],
-            'propertyType'=>[
-                'value'=>'',
-                'type'=>'string'
+            'propertyType' => [
+                'value' => '',
+                'type' => 'string'
             ],
-            'rooms'=>[
-                'value'=>[],
-                'type'=>Room::class
+            'rooms' => [
+                'value' => [],
+                'type' => Room::class
+            ],
+            'town' => [
+                'value' => '',
+                'type' => 'string'
+            ],
+            'postcode' => [
+                'value' => '',
+                'type' => 'string'
+            ],
+            'location' => [
+                'value' => Location::withLatitudeAndLongitude(0, 0),
+                'type' => Location::class
             ]
         ];
     }
@@ -275,5 +289,20 @@ class Property
     public function rooms()
     {
         return $this->rooms;
+    }
+
+    public function town()
+    {
+        return $this->town;
+    }
+
+    public function postcode()
+    {
+        return $this->postcode;
+    }
+
+    public function location()
+    {
+        return $this->location;
     }
 }

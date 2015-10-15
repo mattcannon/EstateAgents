@@ -2,6 +2,7 @@
 
 namespace spec\MattCannon\EstateAgents;
 
+use MattCannon\EstateAgents\Location;
 use MattCannon\EstateAgents\Price;
 use MattCannon\EstateAgents\Property;
 use PhpSpec\ObjectBehavior;
@@ -78,5 +79,9 @@ class PropertySpec extends ObjectBehavior
     function it_should_return_an_array_of_rooms()
     {
         $this->rooms()->shouldBeArray();
+    }
+    function it_should_return_a_location()
+    {
+        $this->location()->shouldBeAnInstanceOf(Location::class);
     }
 }

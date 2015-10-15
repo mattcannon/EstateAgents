@@ -37,4 +37,12 @@ class PropertiesRepositorySpec extends ObjectBehavior
     {
         $this->find('123456');
     }
+    function it_can_list_sales_properties_between_prices_for_a_location()
+    {
+        $this->listSalesPropertiesForLocationPricedBetween('Buckingham',Price::fromString(500),Price::fromString(1000));
+    }
+    function it_can_list_rental_properties_between_prices_for_a_location()
+    {
+        $this->listRentalPropertiesForLocationPricedBetween('Buckingham',Price::fromString(500),Price::fromString(1000));
+    }
 }

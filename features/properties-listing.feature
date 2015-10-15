@@ -32,3 +32,16 @@ Feature: List Properties
     When I find a property with agent ref 123456
     Then I should see a property with agent ref 123456
   
+  Scenario: List sale properties between £50,000 and £100,000 with a location of "Buckingham"
+    Given there are 5 sale properties with 1 priced under £100,000 located in "Buckingham"
+    When I list sale properties between £50,000 and £100,000 located in "Buckingham"
+    Then I should only see properties between £50,000 and £100,000 
+    And I should see 1 properties
+    And it should be located in "Buckingham"
+  
+  Scenario: List rental properties between £50,000 and £100,000 with a location of "Buckingham"
+    Given there are 5 rental properties with 1 priced under £100,000 located in "Buckingham"
+    When I list rental properties between £50,000 and £100,000 located in "Buckingham"
+    Then I should only see properties between £50,000 and £100,000
+    And I should see 1 properties
+    And it should be located in "Buckingham"

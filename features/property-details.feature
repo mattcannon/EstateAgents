@@ -24,3 +24,7 @@ Feature: Property details
     Given there is a detailed property with agent ref 123456
     When I find a detailed property with agent ref 123456
     Then it should return the property type
+  
+  Scenario: Property Location
+    Given there is a property with agent ref 123456 which has a latitude of "52.8" and a longitude of "-0.8"
+    Then it should have a location property

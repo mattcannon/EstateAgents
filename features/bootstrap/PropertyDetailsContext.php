@@ -1,11 +1,12 @@
 <?php
 use Behat\Behat\Context\Context;
 use Behat\Behat\Context\SnippetAcceptingContext;
-use Behat\Behat\Tester\Exception\PendingException;
+use MattCannon\EstateAgents\Location;
 use MattCannon\EstateAgents\PropertiesRepository;
 use MattCannon\EstateAgents\Property;
 
-class PropertyDetailsContext implements Context, SnippetAcceptingContext {
+class PropertyDetailsContext implements Context, SnippetAcceptingContext
+{
 
     use TransformPrice;
 
@@ -14,8 +15,8 @@ class PropertyDetailsContext implements Context, SnippetAcceptingContext {
      */
     public function thereIsADetailedPropertyWithAgentRef($agentRef)
     {
-        $property = Property::withDetails(['agentRef'=>$agentRef,
-        'features'=>['feature 1','feature 2']]);
+        $property = Property::withDetails(['agentRef' => $agentRef,
+            'features' => ['feature 1', 'feature 2']]);
         $this->propertiesRepository->addProperties([$property]);
     }
 
@@ -26,6 +27,7 @@ class PropertyDetailsContext implements Context, SnippetAcceptingContext {
     {
         $this->property = $this->propertiesRepository->find($agentRef);
     }
+
     /**
      * Initializes context.
      *
@@ -61,6 +63,7 @@ class PropertyDetailsContext implements Context, SnippetAcceptingContext {
     {
         PHPUnit_Framework_Assert::assertTrue(is_string($this->property->description()));
     }
+
     /**
      * @Then it should return the number of bedrooms
      */
@@ -76,4 +79,24 @@ class PropertyDetailsContext implements Context, SnippetAcceptingContext {
     {
         PHPUnit_Framework_Assert::assertTrue(is_string($this->property->propertyType()));
     }
+
+    /**
+     * @Given there is a property with agent ref :agentRef which has a latitude of :lat and a longitude of :long
+     */
+    public function thereIsAPropertyWithAgentRefWhichHasALatitudeOfAndALongitudeOf($agentRef, $lat, $long)
+    {
+        $this->property = Property::withDetails([
+            'location' => Location::withLatitudeAndLongitude($lat, $long),
+            'agentRef' => $agentRef
+        ]);
+    }
+
+    /**
+     * @Then it should have a location property
+     */
+    public function itShouldHaveALocationProperty()
+    {
+        PHPUnit_Framework_Assert::assertTrue(is_a(Location::class, $this->property->location()));
+    }
+
 }
