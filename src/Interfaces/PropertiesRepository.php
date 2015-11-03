@@ -62,4 +62,7 @@ interface PropertiesRepository
      * @return array
      */
     public function listRentalPropertiesForLocationPricedBetween($location, Price $lowPrice, Price $highPrice);
+    
+    public function whereIn($favourites);
+
 }
