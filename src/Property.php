@@ -192,6 +192,10 @@ class Property
             'location' => [
                 'value' => Location::withLatitudeAndLongitude(0, 0),
                 'type' => Location::class
+            ],
+            'virtual_tour_url' => [
+                'value' => '',
+                'type' => 'string'
             ]
         ];
     }
